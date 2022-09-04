@@ -1,0 +1,11 @@
+﻿{
+  "Group": "Widgets",
+  "FriendlyName": "Soft2PrintWidget",
+  "SystemName": "Epp.Plugin.Soft2Print.Widget",
+  "Version": "1.10",
+  "SupportedVersions": [ "4.50" ],
+  "Author": "QuikSync",
+  "DisplayOrder": -1,
+  "FileName": "Epp.Plugin.Soft2Print.Widget.dll",
+  "Description": "ShoppingCart Additional Information"
+}

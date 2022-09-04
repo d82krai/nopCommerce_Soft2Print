@@ -1,0 +1,11 @@
+﻿{
+  "Group": "Try Group",
+  "FriendlyName": "TrySimplePlugin",
+  "SystemName": "Widgets.plugSimple",
+  "Version": "1.13.1",
+  "SupportedVersions": [ "4.50" ],
+  "Author": "Trial team",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.try.plugSimple.dll",
+  "Description": "This is trial plugin"
+}

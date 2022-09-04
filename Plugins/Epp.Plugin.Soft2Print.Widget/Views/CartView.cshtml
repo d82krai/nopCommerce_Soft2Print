@@ -1,0 +1,31 @@
+﻿<br />
+<script language='javascript' type='text/javascript'>
+          $(document).ready(function () {
+             
+              var content = "";
+               $.ajax({
+                    method :'GET',
+                    url: "/Soft2PrintWidget/GetData",
+                    success: function (data) {
+                       
+                         var x = document.getElementsByClassName("product-name");
+                     
+                         for (var i = 0; i < x.length; i++) {
+                             for (var j = 0; j < data.length; j++) {
+                                    if(data[j].ProductName == x[i].textContent)
+                                    {
+                                        if(data[j].AdditionalSheetCount != "0" && data[j].AdditionalSheetCount != "")
+                                        {
+                                            x[i].innerHTML  = x[i].textContent + '<br>Additional Sheet Count=' + data[j].AdditionalSheetCount;
+                                        }                                    
+                                    }
+                            }
+                         }                  
+
+                    },
+                      error: function (msg) {
+                                 console.log("something wrong");
+    }
+     });
+          });
+</script>

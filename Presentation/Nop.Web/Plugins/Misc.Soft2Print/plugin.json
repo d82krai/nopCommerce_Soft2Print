@@ -1,0 +1,11 @@
+﻿{
+  "Group": "Misc",
+  "FriendlyName": "Soft2Print",
+  "SystemName": "Epp.Plugin.Soft2Print",
+  "Version": "1.00",
+  "SupportedVersions": [ "4.50" ],
+  "Author": "QuikSync",
+  "DisplayOrder": 1,
+  "FileName": "Epp.Plugin.Soft2Print.dll",
+  "Description": "This plugin allows to integrate with Soft2Print service"
+}
