@@ -23,7 +23,7 @@
     {
         <link rel="stylesheet" href="~/lib_npm/magnific-popup/magnific-popup.css" />
         <script asp-exclude-from-bundle="true" src="~/lib_npm/magnific-popup/jquery.magnific-popup.min.js" asp-location="Footer"></script>
-        <div class="picture-thumbs" style="background-color:grey">
+        <div class="picture-thumbs">
             @foreach (var picture in Model.PictureModels)
             {
                 <a class="thumb-item" href="@picture.FullSizeImageUrl" alt="@picture.AlternateText" title="@picture.Title">
@@ -71,7 +71,7 @@
             <div class="picture-thumbs">
                 @foreach (var picture in Model.PictureModels)
                 {
-                    <div class="thumb-item" style="background-color:red">
+                    <div class="thumb-item">
                         <img src="@picture.ThumbImageUrl" alt="@picture.AlternateText" title="@picture.Title" data-defaultsize="@picture.ImageUrl" data-fullsize="@picture.FullSizeImageUrl" />
                     </div>
                 }
