@@ -32,7 +32,7 @@
                     }
                     @if (!string.IsNullOrEmpty(attribute.Name))
                     {
-                        @if (!string.Equals(attribute.Name, "Additional Sheet Count"))
+                        @if (!string.Equals(attribute.Name, "Additional Sheet Price"))
                         {
                             <div class="attribute-description">
                                 @Html.Raw(attribute.Description)
@@ -137,7 +137,7 @@
                             {
                                 @if (!string.IsNullOrEmpty(attribute.Description))
                                 {
-                                    @if (!string.Equals(attribute.Description, "Additional Sheet Count"))
+                                    @if (!string.Equals(attribute.Description, "Additional Sheet Price"))
                                     {
                                         <input name="@(controlId)" type="text" class="textbox" id="@(controlId)" value="@(attribute.DefaultValue)" />
                                     }
