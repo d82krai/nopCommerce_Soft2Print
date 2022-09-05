@@ -2,7 +2,7 @@
 
 <div class="gallery"> 
     @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductDetailsBeforePictures, additionalData = Model })
-    <div class="picture"> <span>hello12</span>
+    <div class="picture">
         @if (Model.DefaultPictureZoomEnabled && Model.PictureModels.Count == 1)
         {
             <a href="@Model.DefaultPictureModel.FullSizeImageUrl" title="@Model.DefaultPictureModel.Title" id="main-product-img-lightbox-anchor-@Model.Id">
@@ -23,7 +23,7 @@
     {
         <link rel="stylesheet" href="~/lib_npm/magnific-popup/magnific-popup.css" />
         <script asp-exclude-from-bundle="true" src="~/lib_npm/magnific-popup/jquery.magnific-popup.min.js" asp-location="Footer"></script>
-        <div class="picture-thumbs" style="background-color:grey"> <span>hello12345</span>
+        <div class="picture-thumbs" style="background-color:grey">
             @foreach (var picture in Model.PictureModels)
             {
                 <a class="thumb-item" href="@picture.FullSizeImageUrl" alt="@picture.AlternateText" title="@picture.Title">
@@ -68,7 +68,7 @@
     {
         if (Model.PictureModels.Count > 1)
         {
-            <div class="picture-thumbs"> <span>hello545566</span>
+            <div class="picture-thumbs">
                 @foreach (var picture in Model.PictureModels)
                 {
                     <div class="thumb-item" style="background-color:red">
