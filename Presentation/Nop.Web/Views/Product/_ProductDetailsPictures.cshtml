@@ -1,5 +1,7 @@
 ﻿@model ProductDetailsModel
-<p>Hello6666</p>
+ <script>
+    alert('hello');
+</script>
 <div class="gallery">
     @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductDetailsBeforePictures, additionalData = Model })
     <div class="picture">
