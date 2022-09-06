@@ -6,7 +6,7 @@
 @inject CommonSettings commonSettings
 @{
     Layout = "_ColumnsTwo";
-    ViewBag.CategoryName = Model.CategoryBreadcrumb[0].Name;
+
     //title
     NopHtml.AddTitleParts(!string.IsNullOrEmpty(Model.MetaTitle) ? Model.MetaTitle : Model.Name);
     //meta

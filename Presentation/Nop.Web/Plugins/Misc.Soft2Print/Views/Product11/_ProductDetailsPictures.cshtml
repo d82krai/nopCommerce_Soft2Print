@@ -1,4 +1,7 @@
 ﻿@model Nop.Web.Models.Catalog.ProductDetailsModel
+ <script> 
+    alert('product 11');
+    </script>
 
 <div class="gallery"> 
     @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductDetailsBeforePictures, additionalData = Model })

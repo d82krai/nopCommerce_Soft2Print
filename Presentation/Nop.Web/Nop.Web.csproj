@@ -59,7 +59,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Package\" />
+    <None Include="Themes\Views\Shared\Head.cshtml" />
+    <None Include="Themes\Views\_ViewImports.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\db_backups\" />
   </ItemGroup>
 
   <!-- This target execute after "Build" target.
