@@ -5,7 +5,9 @@
 @inject ISettingService settingService
 @inject IStoreContext storeContext
 @inject IWorkContext workContext
-
+<script> 
+    alert('pacific cloud');
+    </script>
 @{
     var storeId = (await storeContext.GetCurrentStoreAsync()).Id;
 

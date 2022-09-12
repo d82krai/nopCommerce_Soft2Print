@@ -6,7 +6,9 @@
 @inject IWorkContext workContext
 @inject IStoreContext storeContext
 @inject ISettingService settingService
-
+<script> 
+    alert('cloud');
+    </script>
 @{
     var supportRtl = (await workContext.GetWorkingLanguageAsync()).Rtl;
 }

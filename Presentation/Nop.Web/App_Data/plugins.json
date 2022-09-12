@@ -12,10 +12,6 @@
       "Version": "1.39"
     },
     {
-      "SystemName": "CurrencyExchange.ECB",
-      "Version": "1.32"
-    },
-    {
       "SystemName": "Misc.WebApi.Frontend",
       "Version": "1.0"
     },
@@ -92,10 +88,6 @@
       "Version": "4.5"
     },
     {
-      "SystemName": "SevenSpikes.Nop.Plugins.CloudZoom",
-      "Version": "4.5"
-    },
-    {
       "SystemName": "SevenSpikes.Nop.Plugins.InstantSearch",
       "Version": "4.5"
     },
@@ -124,10 +116,6 @@
       "Version": "4.5"
     },
     {
-      "SystemName": "SevenSpikes.Nop.Plugins.RichBlog",
-      "Version": "4.5"
-    },
-    {
       "SystemName": "SevenSpikes.Nop.Plugins.SaleOfTheDay",
       "Version": "4.5"
     },
@@ -142,6 +130,10 @@
     {
       "SystemName": "NopStation.Plugin.Payments.Razorpay",
       "Version": "4.50.1.0"
+    },
+    {
+      "SystemName": "Payments.Payu",
+      "Version": "1.00"
     }
   ],
   "PluginNamesToUninstall": [],
