@@ -1,0 +1,58 @@
+﻿
+<br />
+<style>
+    .ProductList
+    {
+    background-color: #f3f3f3;
+    font-family: 'Roboto',sans-serif;
+    font-size: 14px;
+    font-weight: lighter;
+    color: #888;
+    width: 100%; padding-left: 30px;padding-right: 30px;line-height: normal; justify-content: right;
+    text-align: justify;
+}
+
+/* visited link */
+a:visited {
+  color: green;
+}
+
+/* mouse over link */
+a:hover {
+  color: #333;
+}
+
+/* selected link */
+a:active {
+  color: #888888;
+}
+</style>
+<div style="padding-left:20px">
+    <h3>Products</h3>
+    <br />
+    <div class="ProductList" id="ProductList">Product List</div>
+    <br />
+</div>
+<script language='javascript' type='text/javascript'>
+    $(document).ready(function() {
+
+        var content = "";
+        $.ajax({
+            method: 'GET',
+            url: "/FooterProductListWidget/GetProductList",
+            success: function(data) {
+                var pList = "";
+                var x = document.getElementById("productlist");
+
+                for (var j = 0; j < data.length; j++) {
+                    pList += "<a href='" + data[j].ProductURL + "'>" + data[j].ProductName + "</a> | ";
+                }
+                $('#ProductList').html(pList);
+              
+            },
+            error: function(msg) {
+                console.log("something wrong");
+            }
+        });
+    });
+</script>

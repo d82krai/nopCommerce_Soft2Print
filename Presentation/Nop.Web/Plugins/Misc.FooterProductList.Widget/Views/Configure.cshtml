@@ -1,0 +1,88 @@
+﻿@model ConfigurationModel
+@inject Nop.Core.IWebHelper webHelper
+
+@using Epp.Plugin.Soft2Print
+@using Epp.Plugin.Soft2Print.Models
+
+
+@using Nop.Web.Framework.Models.DataTables
+
+@{
+    Layout = "_ConfigurePlugin";
+}
+
+<link rel="stylesheet" href="~/Plugins/Misc.Soft2Print/Content/styles.css" />
+
+@await Component.InvokeAsync("StoreScopeConfiguration")
+
+<form asp-controller="Soft2Print" asp-action="Configure" method="post">
+	<section class="content">
+		<div class="container-fluid">			
+				<div class="card card-default">
+					<div class="card-body">
+						@Html.Raw(string.Format(T("Plugins.Epp.Plugin.Soft2Print.Instructions").Text, webHelper.GetStoreLocation()))
+						<div class="form-group row">
+							<div class="col-md-3">
+								<nop-label asp-for="OrganizationName" />
+							</div>
+							<div class="col-md-9">
+								<nop-editor asp-for="OrganizationName" />
+								<span asp-validation-for="OrganizationName"></span>
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-md-3">
+								<nop-label asp-for="OrganizationCode" />
+							</div>
+							<div class="col-md-9">
+								<nop-editor asp-for="OrganizationCode" />
+								<span asp-validation-for="OrganizationCode"></span>
+							</div>
+						</div>
+                        <div class="form-group row">
+							<div class="col-md-3">
+								<nop-label asp-for="CultureCode" />
+							</div>
+							<div class="col-md-9">
+								<nop-editor asp-for="CultureCode" />
+								<span asp-validation-for="CultureCode"></span>
+							</div>
+						</div>
+                        <div class="form-group row">
+							<div class="col-md-3">
+								<nop-label asp-for="CustomerId" />
+							</div>
+							<div class="col-md-9">
+								<nop-editor asp-for="CustomerId" />
+								<span asp-validation-for="CustomerId"></span>
+							</div>
+						</div>
+                     @*   <div class="form-group row">
+							<div class="col-md-3">
+								<nop-label asp-for="Testing" />
+							</div>
+							<div class="col-md-9">
+								<nop-editor asp-for="Testing" />
+                                
+								<span asp-validation-for="Testing"></span>
+							</div>
+						</div>*@
+                         <div class="form-group row">
+							<div class="col-md-3">
+								<nop-label asp-for="ProjectNameFormat" />
+							</div>
+							<div class="col-md-9">
+								<nop-editor asp-for="ProjectNameFormat" />
+								<span asp-validation-for="ProjectNameFormat"></span>
+							</div>
+						</div>
+						<div class="form-group row">
+                            <div class="col-md-9 offset-md-3">
+                                <button type="submit" name="save" class="btn btn-primary">@T("Admin.Common.Save")</button>
+                            </div>
+						</div>
+					</div>
+				</div>			
+		</div>
+	</section>
+</form>

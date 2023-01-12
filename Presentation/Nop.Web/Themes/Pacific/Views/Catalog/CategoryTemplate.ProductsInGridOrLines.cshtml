@@ -11,7 +11,28 @@
 @inject SeoSettings seoSettings
 @inject CommonSettings commonSettings
 @inject IViewComponentSelector viewComponentSelector
-
+<style>
+    button.mylink {
+        font-family:helvetica,arial,sans-serif;
+        font-size: 15px;
+        text-align: Justify;
+        color: blue;
+        background: none;
+        margin: 0;
+        padding: 0;
+        border: none;
+        cursor: pointer;
+        float: right;
+        -moz-user-select: text;
+    }
+    button.mylink span {
+        text-decoration: underline;
+    }
+    button.mylink:hover span,
+    button.mylink:focus span {
+        color: black;
+    }
+</style>
 @{
     Layout = "_ColumnsTwo";
 
@@ -51,7 +72,9 @@
                     <a href="@Url.RouteUrl("Homepage")" title="@T("Categories.Breadcrumb.Top")">@T("Categories.Breadcrumb.Top")</a>
                     <span class="delimiter">@breadcrumbDelimiter</span>
                 </li>
-                @{ int position = 1; }
+                @{
+                    int position = 1;
+                }
                 @foreach (var cat in Model.CategoryBreadcrumb)
                 {
                     var isLastCategory = cat.Id == Model.Id;
@@ -60,7 +83,7 @@
                         {
                             <strong class="current-item" itemprop="name">@cat.Name</strong>
                             <span itemprop="item" itemscope itemtype="http://schema.org/Thing"
-                                  id="@Url.RouteUrl("Category", new {SeName = cat.SeName})">
+                      id="@Url.RouteUrl("Category", new {SeName = cat.SeName})">
                             </span>
                         }
                         else
@@ -86,7 +109,7 @@
         @*description*@
         @if (!string.IsNullOrWhiteSpace(Model.Description))
         {
-            <div class="category-description">
+            <div id="category-description" class="category-description">
                 @Html.Raw(Model.Description)
             </div>
         }
@@ -105,11 +128,11 @@
                                         @if (viewComponentSelector.SelectComponent("LazyLoadImage") != null)
                                         {
                                             @await Component.InvokeAsync("LazyLoadImage", new (string Key, string Value)[]
-                                            {
-                                                ("src", item.PictureModel.ImageUrl),
-                                                ("alt", item.PictureModel.AlternateText),
-                                                ("title", item.PictureModel.Title)
-                                            })
+                                {
+                                ("src", item.PictureModel.ImageUrl),
+                                ("alt", item.PictureModel.AlternateText),
+                                ("title", item.PictureModel.Title)
+                                })
                                         }
                                         else
                                         {
@@ -150,11 +173,11 @@
         }
         @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsAfterFeaturedProducts, additionalData = Model })
         @await Html.PartialAsync("_CatalogSelectors", Model.CatalogProductsModel)
-		@section CatalogFilters {
-		    @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsBeforeFilters, additionalData = Model })
-		    @await Html.PartialAsync("_CatalogFilters", Model.CatalogProductsModel)
-		}
-		@if (isCategoryPage && isCategoryPageOneColumn)
+        @section CatalogFilters {
+            @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsBeforeFilters, additionalData = Model })
+            @await Html.PartialAsync("_CatalogFilters", Model.CatalogProductsModel)
+        }
+            @if (isCategoryPage && isCategoryPageOneColumn)
         {
 
             var ajaxFiltersOneColumnWidget = await Component.InvokeAsync("Widget", new { widgetZone = "ajax_filters_when_one_column" });
@@ -165,7 +188,7 @@
             }
         }
         @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsBeforeProductList, additionalData = Model })
-        @{ 
+        @{
             var catalogProductsViewData = new ViewDataDictionary(ViewData);
             catalogProductsViewData["fetchUrl"] = Html.Raw(Url.Action("GetCategoryProducts", "Catalog", new { categoryId = Model.Id }));
         }
@@ -173,3 +196,33 @@
         @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsBottom, additionalData = Model })
     </div>
 </div>
+<script>
+    var gsubStr;
+    var ghiddenstr;
+    var morelinktext = "<div><button class='mylink' onclick='myFunction()' id='myBtn'><span>Read more</span></button></div>";
+    var lesslinktext = "<div><button class='mylink' onclick='myFunction()' id='myBtn'><span>Read less</span></button></div>";
+
+    $(".category-description").each(function() {
+        var str = $(this).html();
+        var max = 730;
+        if ($.trim(str).length > max) {
+            var subStr = str.substring(0, max);
+            var hiddenStr = str.substring(max, $.trim(str).length);
+            gsubStr = subStr;
+            ghiddenstr = hiddenStr;
+            $(this).empty().html(subStr + "..." + morelinktext);
+        }
+    });
+
+    function myFunction() {
+        var btnText = document.getElementById("myBtn");
+        var maindiv = document.getElementById("category-description");
+        if (btnText.innerHTML === "<span>Read less</span>") {
+            btnText.innerHTML = "<span>Read more</span>";
+            maindiv.innerHTML = gsubStr + "..." + morelinktext;
+        } else {
+            btnText.innerHTML = "<span>Read less</span>";
+            maindiv.innerHTML = gsubStr + ghiddenstr + lesslinktext;
+        }
+    }
+</script>

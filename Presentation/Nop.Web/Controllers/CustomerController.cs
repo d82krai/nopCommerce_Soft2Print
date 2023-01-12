@@ -444,10 +444,10 @@ namespace Nop.Web.Controllers
         public virtual async Task<IActionResult> Login(LoginModel model, string returnUrl, bool captchaValid)
         {
             //validate CAPTCHA
-            if (_captchaSettings.Enabled && _captchaSettings.ShowOnLoginPage && !captchaValid)
-            {
-                ModelState.AddModelError("", await _localizationService.GetResourceAsync("Common.WrongCaptchaMessage"));
-            }
+            //if (_captchaSettings.Enabled && _captchaSettings.ShowOnLoginPage && !captchaValid)
+            //{
+            //    ModelState.AddModelError("", await _localizationService.GetResourceAsync("Common.WrongCaptchaMessage"));
+            //}
 
             if (ModelState.IsValid)
             {

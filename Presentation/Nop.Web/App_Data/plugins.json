@@ -134,6 +134,10 @@
     {
       "SystemName": "Payments.Payu",
       "Version": "1.00"
+    },
+    {
+      "SystemName": "Epp.Plugin.FooterProductList.Widget",
+      "Version": "1.10"
     }
   ],
   "PluginNamesToUninstall": [],

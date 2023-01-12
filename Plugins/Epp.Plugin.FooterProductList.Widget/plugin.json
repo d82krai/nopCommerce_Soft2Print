@@ -1,0 +1,11 @@
+﻿{
+  "Group": "Widgets",
+  "FriendlyName": "FooterProductListWidget",
+  "SystemName": "Epp.Plugin.FooterProductList.Widget",
+  "Version": "1.10",
+  "SupportedVersions": [ "4.50" ],
+  "Author": "QuikSync",
+  "DisplayOrder": -1,
+  "FileName": "Epp.Plugin.FooterProductList.Widget.dll",
+  "Description": "Product List"
+}
