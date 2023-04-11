@@ -75,7 +75,7 @@ namespace Epp.Plugin.FooterProductList.Widget.Controllers
             var store = await _storeContext.GetCurrentStoreAsync();
             var storeId = store.Id;
             var categories = _categoryService.GetAllCategoriesAsync(storeId);
-            await _logger.InformationAsync($"categories called: ={categories.Result.Count}");
+            //await _logger.InformationAsync($"categories called: ={categories.Result.Count}");
             IList<int> cat = new List<int>();   
             for(var i=0;i<categories.Result.Count ;i++)
             {
@@ -84,7 +84,7 @@ namespace Epp.Plugin.FooterProductList.Widget.Controllers
             
             var products = await _productService.SearchProductsAsync(storeId: storeId);
             
-            await _logger.InformationAsync($"products called: ={products.Count}");
+            //await _logger.InformationAsync($"products called: ={products.Count}");
             foreach (var item in products)
             {
                 var productUrl = Url.RouteUrl("Product", new { SeName = await _urlRecordService.GetSeNameAsync(item) }, _webHelper.GetCurrentRequestProtocol());
@@ -102,7 +102,7 @@ namespace Epp.Plugin.FooterProductList.Widget.Controllers
                       ProductName = "product" + i
                   });
               }*/
-            await _logger.InformationAsync($"productList called: ={model.Count}");
+            //await _logger.InformationAsync($"productList called: ={model.Count}");
             return Json(model);
         }
 

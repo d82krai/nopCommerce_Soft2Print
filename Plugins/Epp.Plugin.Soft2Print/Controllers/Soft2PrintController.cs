@@ -232,10 +232,11 @@ namespace Epp.Plugin.Soft2Print.Controllers
 
             var categoryMapping = (await _categoryService.GetProductCategoriesByProductIdAsync(productId)).FirstOrDefault();
             var categoryName = (await _categoryService.GetCategoryByIdAsync(categoryMapping?.CategoryId ?? 0))?.Name;
-
+            
             model.Module = categoryName;        // "Gifting";
             model.ProductId = productId.ToString();
             model.Url = $@"//services.soft2print.com/module.aspx?id={model.CustGUID}&module={model.Module}&Productcode={model.ProductId}&ProjectID={model.ProjectId}";
+            await _logger.InformationAsync($"ProductId={productId} , URL = {model.Url}, categoryName = {categoryName}");
             return View("~/Plugins/Misc.Soft2Print/Views/Design.cshtml", model);
             // Response.Redirect($@"//services.soft2print.com/module.aspx?id={model.CustGUID}&module={model.Module}&Productcode={model.ProductId}&ProjectID={model.ProjectId}");
             //return View();
@@ -249,16 +250,21 @@ namespace Epp.Plugin.Soft2Print.Controllers
             return cart.Any(m => m.ProductId == productId);
         }
 
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> AddToCart(string id, string jobid, string productcode, string additionalSheetCount)
         {
+            await _logger.InformationAsync($"Add to cart function productid = {productcode},additionalSheetCount = {additionalSheetCount}");
             decimal totalCustomPrice;
             string additionalStyleSheet = "0";
             string additionalSheetCountPrice = "0";
             var product = await _productService.GetProductByIdAsync(Convert.ToInt32(productcode));
+            await _logger.InformationAsync($"GetProductByIdAsync productid = {productcode},additionalSheetCount = {additionalSheetCount}");
             var customer = await _workContext.GetCurrentCustomerAsync();
+            await _logger.InformationAsync($" GetCurrentCustomerAsyncproductid = {productcode},additionalSheetCount =  {additionalSheetCount}");
             var store = await _storeContext.GetCurrentStoreAsync();
+            await _logger.InformationAsync($"GetCurrentStoreAsync productid = {productcode},additionalSheetCount =  {additionalSheetCount}");
             var cart = await _shoppingCartService.GetShoppingCartAsync(customer, ShoppingCartType.ShoppingCart, store.Id);
+            await _logger.InformationAsync($"GetShoppingCartAsync productid = {productcode},additionalSheetCount =  {additionalSheetCount}");
             if (Convert.ToInt32(additionalSheetCount) > 0)
             {
                 var requiredAttributeNames = await _productAttributeService.GetProductAttributeMappingsByProductIdAsync(Convert.ToInt32(productcode));
@@ -288,19 +294,22 @@ namespace Epp.Plugin.Soft2Print.Controllers
                 storeId: store.Id, string.Empty, totalCustomPrice, null, null, 1, true);
 
             cart = await _shoppingCartService.GetShoppingCartAsync(customer, ShoppingCartType.ShoppingCart, store.Id, Convert.ToInt32(productcode));
-            var newCartItem = cart.First();
-            
-            //update remaining fie_s2pOrdersServicelds of s2pOrdersrecord
-            var s2p = await _s2pOrdersService.FindRecordsAsync(customer.Id, Convert.ToInt32(productcode), null, null, Domain.OrderStatus.Design,null);
-            if (s2p != null)
+            var newCartItem = cart.FirstOrDefault();
+            await _logger.InformationAsync($"productid = {productcode},newcartitem = {newCartItem.ProductId}");
+            if (newCartItem != null)
             {
-                s2p.StoreId = store.Id;
-                s2p.AdditionalSheetCount = additionalSheetCount;
-                s2p.JobId = Convert.ToInt32(jobid);
-                s2p.Status = Domain.OrderStatus.AddedToCart;
-                s2p.ShoppingCartId = newCartItem.Id;
-                s2p.AdditionalSheetPrice = Convert.ToDecimal(additionalSheetCountPrice);
-                await _s2pOrdersService.UpdateS2POrderRecordAsync(s2p);
+                //update remaining fie_s2pOrdersServicelds of s2pOrdersrecord
+                var s2p = await _s2pOrdersService.FindRecordsAsync(customer.Id, Convert.ToInt32(productcode), null, null, Domain.OrderStatus.Design, null);
+                if (s2p != null)
+                {
+                    s2p.StoreId = store.Id;
+                    s2p.AdditionalSheetCount = additionalSheetCount;
+                    s2p.JobId = Convert.ToInt32(jobid);
+                    s2p.Status = Domain.OrderStatus.AddedToCart;
+                    s2p.ShoppingCartId = newCartItem.Id;
+                    s2p.AdditionalSheetPrice = Convert.ToDecimal(additionalSheetCountPrice);
+                    await _s2pOrdersService.UpdateS2POrderRecordAsync(s2p);
+                }
             }
             //return View("~/Plugins/Misc.Soft2Print/Views/AddToCart.cshtml");
             return RedirectToRoute("ShoppingCart");
