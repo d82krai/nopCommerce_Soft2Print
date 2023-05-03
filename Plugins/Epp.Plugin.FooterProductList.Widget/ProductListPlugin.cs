@@ -17,7 +17,7 @@ namespace Epp.Plugin.FooterProductList.Widget
 
         public async  Task<IList<string>> GetWidgetZonesAsync()
         {
-            return new List<string> { PublicWidgetZones.Footer };
+            return new List<string> { "NewProductList" };
         }
 
         public override Task InstallAsync()

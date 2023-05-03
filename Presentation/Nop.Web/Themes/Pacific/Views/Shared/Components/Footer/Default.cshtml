@@ -137,6 +137,9 @@
             </div> 
         </div>     
     </div>
+    <div>
+        @await Component.InvokeAsync("Widget", new { widgetZone = "NewProductList", additionalData = Model })
+    </div>
     <div class="footer-lower">
         <div class="footer-lower-left">
             @if(!removeCopyright)
