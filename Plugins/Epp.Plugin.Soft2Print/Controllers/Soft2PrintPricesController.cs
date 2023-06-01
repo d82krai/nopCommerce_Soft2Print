@@ -19,7 +19,7 @@ using Nop.Services.Directory;
 
 namespace Epp.Plugin.Soft2Print.Controllers
 {
-    [AutoValidateAntiforgeryToken]
+    //[AutoValidateAntiforgeryToken]
     public class Soft2PrintPricesController : BasePluginController
     {
         #region Fields

@@ -33,7 +33,7 @@ using Nop.Web.Areas.Admin.Models.Catalog;
 
 namespace Epp.Plugin.Soft2Print.Controllers
 {
-    [AutoValidateAntiforgeryToken]
+    //[AutoValidateAntiforgeryToken]
     public class Soft2PrintController : BasePluginController
     {
         #region Fields
@@ -295,9 +295,10 @@ namespace Epp.Plugin.Soft2Print.Controllers
 
             cart = await _shoppingCartService.GetShoppingCartAsync(customer, ShoppingCartType.ShoppingCart, store.Id, Convert.ToInt32(productcode));
             var newCartItem = cart.FirstOrDefault();
-            await _logger.InformationAsync($"productid = {productcode},newcartitem = {newCartItem.ProductId}");
+           
             if (newCartItem != null)
             {
+                await _logger.InformationAsync($"productid = {productcode},newcartitem = {newCartItem.ProductId}");
                 //update remaining fie_s2pOrdersServicelds of s2pOrdersrecord
                 var s2p = await _s2pOrdersService.FindRecordsAsync(customer.Id, Convert.ToInt32(productcode), null, null, Domain.OrderStatus.Design, null);
                 if (s2p != null)
